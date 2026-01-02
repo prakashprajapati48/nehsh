@@ -308,7 +308,7 @@ const Home = () => {
                                         />
                                     </div>
                                     <div className="card_data">
-                                        {data.productName}
+                                        {data.productname}
                                         <div className="prices">
                                             <div className="price">
                                                 ₹{data.productprice}

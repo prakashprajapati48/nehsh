@@ -80,9 +80,9 @@ const Categorys = () => {
                                         />
                                     </div>
                                     <div className="card_data">
-                                        {item.productname}
+                                        {item.productName}
                                         <div className="price">
-                                            ₹{item.productprice}
+                                            ₹{item.productPrice}
                                         </div>
                                     </div>
                                     <button
@@ -185,9 +185,9 @@ const Categorys = () => {
                                     <img src={Array.isArray(items.file) ? `${items.file}` : `${items.file}`} alt="" />
                                 </div>
                                 <div className="itemDetails">
-                                    <p className="itemName">{items.productname}</p>
+                                    <p className="itemName">{items.productName}</p>
                                     {/* <p className="itemDesc">{items.productDesc}</p> */}
-                                    <p className="itemPrice">₹{items.productprice}</p>
+                                    <p className="itemPrice">₹{items.productPrice}</p>
                                     <button
                                         onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === items.productId) ? pageredirecter("cart") : handleAdd(items)}
                                         id="add_cart_btn">

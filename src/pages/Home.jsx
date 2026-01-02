@@ -311,7 +311,7 @@ const Home = () => {
                                         {data.productName}
                                         <div className="prices">
                                             <div className="price">
-                                                ₹{data.productPrice}
+                                                ₹{data.productprice}
                                             </div>
                                             <div className="orignalprice">
                                                 ₹30000

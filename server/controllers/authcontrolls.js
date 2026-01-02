@@ -253,14 +253,17 @@ export const categoryProduct = async (req, res) => {
     const { category } = req.body;
     let sqlQuery = "SELECT * FROM `userdata` WHERE `category` = $1";
 
-    let ress = await connection.query(sqlQuery, [category], (err, result) => {
-        if (err) {
-            console.error(`Error in sql query: ${err}`)
-        }
+    try {
+    const result = await connection.query(
+      "SELECT * FROM userdata WHERE category = $1",
+      [category]
+    );
 
-        console.log(`Result is: ${result}`)
-        res.json(result.rows)
-    })
+    res.json(result.rows); // ✅ rows
+  } catch (err) {
+    console.error("Error in sql query:", err);
+    res.status(500).json({ error: "Database error" });
+  }
 }
 
 export const razorpay = async (req, res) => {

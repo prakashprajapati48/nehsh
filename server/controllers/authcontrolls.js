@@ -12,7 +12,6 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: "aakashprajapati897@gmail.com",
         pass: process.env.userpass
-        // pass: "cgpe bcmc vddc geuo"
     }
 })
 
@@ -254,16 +253,14 @@ export const categoryProduct = async (req, res) => {
     const { category } = req.body;
     let sqlQuery = "SELECT * FROM `userdata` WHERE `category` = $1";
 
-    let ress = connection.query(sqlQuery, [category], (err, result) => {
+    let ress = await connection.query(sqlQuery, [category], (err, result) => {
         if (err) {
             console.error(`Error in sql query: ${err}`)
         }
 
         console.log(`Result is: ${result}`)
-        res.send(result.rows)
+        res.json(result.rows)
     })
-    // console.log(`Product is: ${category}`)
-    // res.send(`Product is: ${category}`)
 }
 
 export const razorpay = async (req, res) => {

@@ -1,0 +1,102 @@
+.otp-verify {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-self: center;
+  width: 30%;
+  background-color: whitesmoke;
+  padding: 10vh;
+  border-radius: 10px;
+}
+
+.otpHead {
+  justify-self: center;
+}
+
+.otpEmail {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.otpEmail p {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.otpEmail span {
+  font-weight: 500;
+}
+
+.otpInput {
+  display: flex;
+  place-content: center;
+  gap: 5px;
+}
+
+.otpInput input {
+  width: 20%;
+  height: 3rem;
+  font-size: x-large;
+  font-weight: 500;
+  outline: 1px solid lightgrey;
+  border: 1px solid lightgrey;
+  box-shadow: 5px 5px 5px rgb(228, 228, 228);
+  border-radius: 5px;
+  caret-color: black;
+  text-align: center;
+}
+
+.verifyOtpBtn {
+  background-color: blue;
+  color: white;
+  padding: 10px 30vh;
+}
+
+.verifyOtpBtn:disabled {
+  background-color: lightgrey;
+  color: black;
+}
+
+.otpInput input::-webkit-inner-spin-button,
+.otpInput input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.resendBtn {
+  cursor: pointer;
+  font-weight: 500;
+  color: blue;
+}
+
+.otpRemain {
+  margin: 0;
+  position: relative;
+  top: 1rem;
+}
+
+@media screen and (max-width:768px) {
+  .otp-verify {
+    width: 50%;
+  }
+
+  .verifyOtpBtn {
+    padding: 10px 20vh;
+  }
+
+}
+
+@media screen and (max-width:480px) {
+  .otp-verify {
+    width: auto;
+    padding: 15px;
+    padding-bottom: 40px;
+  }
+
+  .verifyOtpBtn {
+    padding: 10px 15vh;
+  }
+
+}

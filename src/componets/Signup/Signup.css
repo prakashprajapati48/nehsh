@@ -1,0 +1,150 @@
+.signup {
+    position: fixed;
+    z-index: 9999;
+    align-self: anchor-center;
+    justify-self: center;
+    width: 30%;
+    /* background: rgba(0, 0, 0, 0.45); */
+    background-color: white;
+    height: 35rem;
+    align-content: center;
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    top: -20rem;
+    transition: top 0.5s ease, opacity 0.4s ease;
+}
+
+.signup_show {
+    top: 2rem;
+    opacity: 1;
+}
+
+.closeSignupmodal{
+    position: absolute;
+    z-index: 999;
+    display: flex;
+    justify-self: end;
+    right: 2rem;
+    cursor: pointer;
+}
+
+.signup_hide {
+    top: -70rem;
+    opacity: 0;
+}
+
+.signup_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-self: center;
+    width: 80%;
+}
+
+.signup_header {
+    /* color: whitesmoke; */
+    font-weight: 500;
+    margin: 10px 0;
+    font-size: xx-large;
+    color: black;
+}
+
+/* .signupUsername, */
+.pass {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.userlabel,
+.labelpass {
+    font-weight: 500;
+    user-select: none;
+}
+
+.signup_input {
+    width: 94%;
+    font-size: larger;
+    border-radius: 7px;
+    padding: 10px;
+    background-color: #F6F4F9;
+    color: black;
+    border: 1px solid lightgrey;
+}
+
+.signup_input:focus-visible {
+    outline: 1px solid lightgrey;
+}
+
+.signup_input::placeholder {
+    color: #C0BFCF;
+    user-select: none;
+}
+
+.showpass {
+    position: absolute;
+    right: 0;
+    width: fit-content;
+    justify-self: anchor-center;
+    top: 0;
+    left: 0;
+    right: 5px;
+    bottom: 0;
+    display: flex;
+    justify-self: end;
+    align-self: center;
+    /* left: 57%; */
+    /* align-self: end; */
+}
+
+.signup_btn {
+    font-size: larger;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #3E49FE;
+    color: white;
+    text-transform: capitalize;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    /* align-self: center; */
+    /* background-color: #3F49FD; */
+    /* background-color: blue; */
+}
+
+.loginBtns {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: large;
+}
+
+.loginBtns a {
+    color: blue;
+}
+
+@media screen and (max-width:1024px) {
+    .signup{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .signup{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .signup {
+        width: 90%;
+    }
+
+    /* .signup_hide {
+        top: -50rem;
+    } */
+}

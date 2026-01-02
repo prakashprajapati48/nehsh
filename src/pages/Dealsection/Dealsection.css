@@ -1,0 +1,107 @@
+.dealsection {
+    background-color: #FFF4F1;
+    padding: 2rem 0.4rem;
+}
+
+.timeoutsection {
+    background: linear-gradient(red, orange);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.dealDetails {
+    text-align: left;
+    color: white;
+}
+
+.timeicon {
+    display: flex;
+    gap: 5px;
+    text-transform: uppercase;
+    font-size: large;
+}
+
+.offerHeader {
+    font-size: 2.2em;
+    font-weight: 500;
+}
+
+.dealbtn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: red;
+}
+
+.offer_timer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    user-select: none;
+}
+
+.show_time {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.hour,
+.minutes,
+.seconds {
+    padding: 16px 80px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    border-radius: 10px;
+}
+
+.hourtext,
+.minutestext,
+.secondtext {
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+@media screen and (max-width:768px) {
+    .timeoutsection {
+        flex-direction: column;
+    }
+
+    .dealDetails {
+        width: 100%;
+    }
+
+    .offer_timer {
+        width: 100%;
+    }
+
+    .show_time {
+        justify-content: space-between;
+    }
+
+    .hour,
+    .minutes,
+    .seconds {
+        padding: 3% 13%;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .offerHeader {
+        font-size: 1.2em;
+    }
+
+    .hour,
+    .minutes,
+    .seconds {
+        padding: 10px 20px;
+    }
+}

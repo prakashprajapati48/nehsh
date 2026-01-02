@@ -1,0 +1,11 @@
+/* .checkOut{
+    position: absolute;
+    z-index: 999;
+} */
+
+.confirmPaymentBtn{
+    background-color: blue;
+    color: white;
+    display: flex;
+    justify-self: center;
+}

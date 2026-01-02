@@ -1,0 +1,319 @@
+import { connection } from '../db/db.js'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config'
+import nodemailer from 'nodemailer';
+import Razorpay from 'razorpay';
+
+// let nahshpass = "cgpe bcmc vddc geuo"
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "aakashprajapati897@gmail.com",
+        pass: process.env.userpass
+        // pass: "cgpe bcmc vddc geuo"
+    }
+})
+
+let otpsender = async (useremail, otp) => {
+    try {
+        const info = await transporter.sendMail({
+            from: `"NEHSH Support" <${process.env.useremail}>"`,
+            to: useremail,
+            subject: "Verify your NEHSH account",
+            html: `Your otp is: ${otp}`
+        });
+
+        console.log(`Message sent: ${info.messageId}`)
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    }
+
+    catch (err) {
+        console.error(`Error mail sending: ${err}`)
+    }
+}
+
+export const signup = async (req, res) => {
+    const { username, useremail, userpass } = req.body;
+    try {
+        console.log("useremail is: ", useremail)
+
+        let sqlcmd = `INSERT INTO users ( username,email, userpass) VALUES (?,?,?)`;
+
+        let checkexist = "SELECT * FROM users WHERE username = ?";
+
+        let saltround = 10
+        let salt = await bcrypt.genSalt(saltround)
+        let hashpass = await bcrypt.hash(userpass, salt);
+
+        connection.query(checkexist, [username], (err, result) => {
+            if (err) {
+                console.error(`Error in database finding user`)
+            }
+
+            if (result.length > 0) {
+                console.log(`${username} already exist`)
+                return res.status(400).json({ message: "User already created account" });
+            }
+
+            const otp = Math.floor(100000 + Math.random() * 900000);
+            const expiresAt = Date.now() + 5 * 60 * 1000;
+
+            otpsender(useremail, otp);
+
+            connection.query("select * from pending_users WHERE email=?", [useremail], (err, pendingRes) => {
+                if (err) {
+                    console.error(`Error in pending user db: ${err}`)
+                }
+
+                if (pendingRes.length > 0) {
+                    connection.query("UPDATE pending_users SET otp = ?, expires_at = ? WHERE email = ?", [otp, expiresAt, useremail])
+                }
+
+                connection.query(
+                    "INSERT INTO pending_users (username, email, password, otp, expires_at) VALUES (?,?,?,?,?)",
+                    [username, useremail, hashpass, otp, expiresAt]
+                );
+            })
+
+
+            return res.status(201).json({ email: useremail, message: "Otp Send successfully" });
+
+        })
+    }
+
+    catch (err) {
+        console.error(`Error in data recieve: ${err}`)
+    }
+}
+
+export const otp_verify = async (req, res) => {
+    const { otp, email } = req.body;
+
+    let sqlcmd = `INSERT INTO users ( username,email, userpass) VALUES (?,?,?)`;
+
+    connection.query("SELECT * FROM pending_users WHERE email = ?", [email], (err, res1) => {
+        if (err) {
+            console.error(`Error: ${err}`);
+            return res.status(400).json({ message: "Signup data not found" });
+        }
+
+        if (!res1.length) {
+            console.error("User not found")
+        }
+
+        // console.log(res1)
+
+        if (String(res1[0].otp) !== String(otp)) {
+            console.log(`${otp} Otp is wrong`);
+            return res.status(400).json({ message: "Invalid OTP" });
+        }
+
+        connection.query(sqlcmd, [res1[0].username, res1[0].email, res1[0].password])
+
+        connection.query("DELETE FROM pending_users WHERE email = ?", [email])
+
+        res.json({ message: "Account created successfully" });
+    })
+}
+
+export const login = async (req, res) => {
+    const { loginuser, loginpass } = req.body;
+
+    let userexist = "SELECT * FROM users WHERE username = ?";
+    console.log("user name is:", loginuser)
+
+    connection.query(userexist, [loginuser], (err, result) => {
+        if (err) {
+            console.error(`Error in database: ${err}`)
+            return res.status(201).json({ message: "Login server in error" });
+        }
+
+        if (result.length > 0) {
+
+            let dbpass = result[0].userpass;
+            bcrypt.compare(loginpass, dbpass, (err, resu) => {
+                if (err) {
+                    console.error("Error")
+                }
+
+                if (!resu) {
+                    console.log("password not match")
+                    // res.json({ message: "Password not match" })
+                    return res.status(201).json({ message: "Enter password not match" });
+                }
+
+                let jwt_secert = "ecomm"
+
+                let logintoken = jwt.sign({ userId: result[0].userId, useremail: result[0].email, username: result[0].username, usrepass: result[0].userpass },
+                    jwt_secert,
+                    { expiresIn: '1h' }
+                )
+
+                // console.log(`User token is: ${logintoken}`)
+                console.log("Successfuly login")
+                return res.json({
+                    message: "Successfully login",
+                    username: result[0].username,
+                    token: logintoken
+                });
+            })
+        }
+    })
+}
+
+export const admin = async (req, res) => {
+    res.send("hello")
+}
+
+export const addData = async (req, res) => {
+    const { productName, price, desc, category, quantity, stock } = req.body;
+    // const { file } = req.file;
+    const imageFile = req.file ? req.file.filename : null;
+    // console.log(`Uploaded data is: ${productName} ${price} ${desc} ${category} ${quantity} ${stock}`)
+    // console.log(`File is: ${imageFile}`)
+    // console.log("Added Data!")
+    // res.json({ msg: "Hello " })
+    let insetquery = "INSERT INTO `userdata` (`productName`, `productDesc`, `productPrice`,`category`,`availableQuantity`,`quantity`,stock,`file`) VALUES (?, ?,?,?,?,?,?,?)";
+    connection.query(insetquery, [productName, desc, price, category, quantity, quantity, stock, imageFile], (err, result) => {
+        if (err) {
+            console.error(`Error in database connection insetion: ${err}`)
+        }
+        if (!result) {
+            console.error(`Error in result: ${result}`)
+        }
+        console.log("Done")
+    })
+    res.send({ msg: "Done" })
+}
+
+export const dataRetrive = async (req, res) => {
+    let search_query = "SELECT * FROM userdata"
+
+    connection.query(search_query, (err, result) => {
+        if (err) {
+            console.error(`Error: ${err}`)
+        }
+        res.send(result)
+    })
+}
+
+export const users = async (req, res) => {
+    let query = "SELECT * FROM users";
+
+    connection.query(query, (err, result) => {
+        if (err) throw console.error(`Error in user data getting: ${err}`);
+
+        // console.log(`user retrive data is: ${result}`)
+        res.send(result)
+    })
+}
+
+export const updateProduct = async (req, res) => {
+    const { NewTitle, NewDesc, newPrice, newQuant, productID } = req.body;
+    let sqlQuery = "UPDATE `userdata` SET `productName`=?,`productDesc`=?,`productPrice`= ?,`availableQuantity`=? WHERE `userdata`.`productId` = ?";
+
+    connection.query(sqlQuery, [NewTitle, NewDesc, newPrice, newQuant, productID], (err, result) => {
+        if (err) console.error(`Error: ${err}`);
+
+        // res.send("Update successfully data!")
+        res.redirect(302, "/Update successfully data")
+    })
+}
+
+export const deleteProduct = async (req, res) => {
+    const { productID } = req.body;
+
+    let deleteQuery = "DELETE FROM userdata WHERE `userdata`.`productId` = ?";
+
+    connection.query(deleteQuery, [productID], (err, result) => {
+        if (err) console.error(`Error: ${err}`);
+
+        console.log(`Delete id is: ${productID}`)
+
+        console.log("Data Delete")
+
+        res.send("Product Deleted")
+    })
+}
+
+export const searchProduct = async (req, res) => {
+    const { searchData } = req.body;
+
+    let sqlQuery = "SELECT * FROM `userdata` WHERE `productName` LIKE ?";
+
+    connection.query(sqlQuery, [`%${searchData}%`], (err, result) => {
+        if (err) console.error(`Error ${err}`);
+
+        res.send(result)
+    })
+}
+
+export const categoryProduct = async (req, res) => {
+    const { category } = req.body;
+    let sqlQuery = "SELECT * FROM `userdata` WHERE `category` = ?";
+
+    let ress = connection.query(sqlQuery, [category], (err, result) => {
+        if (err) {
+            console.error(`Error in sql query: ${err}`)
+        }
+
+        console.log(`Result is: ${result}`)
+        res.send(result)
+    })
+    // console.log(`Product is: ${category}`)
+    // res.send(`Product is: ${category}`)
+}
+
+export const razorpay = async (req, res) => {
+    const razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_SECRET_ID
+    })
+
+    const option = {
+        amount: req.body.amount,
+        currency: "INR",
+        receipt: "receipt#1",
+        payment_capture: 1
+    }
+
+    try {
+        const response = await razorpay.orders.create(option)
+
+        res.json({
+            order_id: response.id,
+            currency: response.currency,
+            amount: response.amount
+        })
+    } catch (error) {
+        res.status(500).send("Internal server error")
+    }
+}
+
+export const paymentGet = async (req, res) => {
+    const { paymentId } = req.params;
+
+    const razorpay = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_SECRET_ID
+    })
+
+    try {
+        const payment = await razorpay.payments.fetch(paymentId)
+
+        if (!payment) {
+            res.send(500).json("Error at razor pay loading")
+        }
+
+        res.json({
+            status: payment.status,
+            amount: payment.amount,
+            method: payment.method,
+            currency: payment.currency
+        })
+    } catch (error) {
+        res.status(500).json("Failed to fetch")
+    }
+}

@@ -1,0 +1,269 @@
+.footer {
+    background-color: #101828;
+    border-top: 1px solid grey;
+}
+
+.footerSection {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    color: white;
+    padding: 1rem 2rem;
+    gap: 20px;
+}
+
+.brandDetails {
+    text-align: left;
+    grid-column: span 2 / span 2;
+}
+
+.brandname {
+    background: linear-gradient(blue, purple);
+    background-clip: text;
+    color: transparent;
+    font-size: x-large;
+    margin: 10px 0;
+}
+
+.detail {
+    font-size: larger;
+    font-weight: 200;
+    color: lightgray;
+}
+
+.detail_contacts {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    gap: 5px;
+}
+
+.detail_contacts svg {
+    stroke: #4F9DFC;
+    width: 20px;
+    height: 18px;
+}
+
+.socialmedia {
+    display: flex;
+    gap: 10px;
+}
+
+.socialIconbtn {
+    border-radius: 50%;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.facebookIcon,
+.instagramIcon,
+.twitterIcon,
+.youtubeIcon {
+    width: 20px;
+    /* height: 20px; */
+}
+
+.header_service {
+    font-size: large;
+    font-weight: 500;
+    text-align: left;
+}
+
+.service_ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.service_li {
+    list-style-type: none;
+    text-align: left;
+    color: white;
+    font-weight: 200;
+}
+
+.about_header {
+    font-size: large;
+    font-weight: 400;
+    text-align: left;
+}
+
+.aboutus_ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aboutus_li {
+    list-style-type: none;
+    text-align: left;
+    color: white;
+    font-weight: 200;
+}
+
+.subscribe_updates {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.subscribe_header {
+    font-size: large;
+    font-weight: 400;
+    text-align: left;
+}
+
+.subscriber_email {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact_email {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #1E2939;
+    border: 1px solid #364153;
+    color: white;
+    stroke: white;
+    padding: 10px;
+}
+
+.contact_email::placeholder {
+    color: #456882;
+}
+
+.email_btn {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #155DFC;
+    color: white;
+}
+
+.deals_updates {
+    font-size: large;
+    font-weight: 200;
+}
+
+.subscribe_condition {
+    font-size: small;
+    font-weight: 200;
+}
+
+.footer_copyrights {
+    color: white;
+    display: flex;
+    margin: 1rem 6rem;
+    justify-content: space-between;
+    border-top: 1px solid #1E2939;
+    align-items: center;
+}
+
+.copyrights {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #99A1AF;
+}
+
+.copyrightIcon {
+    width: 16px;
+}
+
+.copyright_ul {
+    display: flex;
+    gap: 30px;
+    color: #99A1AF;
+}
+
+.payment_methods {
+    display: flex;
+    color: #99A1AF;
+    gap: 5px;
+}
+
+.creditcardIcon {
+    display: flex;
+    stroke: white;
+    color: black;
+    padding: 2px 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.cardmethod {
+    padding: 2px 10px;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+}
+
+@media screen and (max-width:1024px) {
+}
+
+@media screen and (max-width:768px) {
+    .footerSection {
+        padding: 1rem 2rem;
+        gap: 25px;
+    }
+
+    .footerSection {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .brandDetails {
+        grid-column: 1;
+    }
+
+    .service_ul {
+        margin: 20px auto;
+    }
+
+    .footer_copyrights {
+        margin: 1rem 0;
+        font-size: small;
+        flex-direction: column;
+    }
+
+    .copyrightIcon {
+        width: 40px;
+    }
+
+    .payment_methods {
+        gap: 10px;
+    }
+
+    .creditcardIcon svg {
+        height: auto;
+    }
+
+    .cardmethod {
+        place-content: center;
+    }
+
+}
+
+@media screen and (max-width:480px) {
+    .footerSection {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footer_copyrights {
+        flex-direction: column;
+        padding: 1rem 0.1rem;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .copyright_ul {
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .copyright_li {
+        list-style-type: none;
+        font-size: 11px;
+    }
+}

@@ -75,8 +75,8 @@ const Categorys = () => {
                                 <div className="cards cursor-pointer" key={index}>
                                     <div className="card_img">
                                         <img
-                                            // src={Array.isArray(item.file) ? (`http://localhost:5000/uploads/${item.file[0]}`) : (`http://localhost:5000/uploads/${data.file}`)}
-                                            src={`http://localhost:5000/uploads/${item.file}`} onClick={() => setImageview(item.file)}
+                                            // src={Array.isArray(item.file) ? (`${item.file}`) : (`${data.file}`)}
+                                            src={`${item.file}`} onClick={() => setImageview(item.file)}
                                         />
                                     </div>
                                     <div className="card_data">
@@ -121,7 +121,7 @@ const Categorys = () => {
                                 className="swiper-container"
                             >
                                 <SwiperSlide className="swiper-slide">
-                                    <img src={`http://localhost:5000/uploads/${imageView}`} alt={imageView} />
+                                    <img src={`${imageView}`} alt={imageView} />
                                 </SwiperSlide>
                             </Swiper>
                         </div>
@@ -182,7 +182,7 @@ const Categorys = () => {
                         {data.map((items, idx) => (
                             <div className="categoryItems" key={idx}>
                                 <div className="categoryImg">
-                                    <img src={Array.isArray(items.file) ? `http://localhost:5000/uploads/${items.file[0]}` : `http://localhost:5000/uploads/${items.file}`} alt="" />
+                                    <img src={Array.isArray(items.file) ? `${items.file}` : `${items.file}`} alt="" />
                                 </div>
                                 <div className="itemDetails">
                                     <p className="itemName">{items.productName}</p>

@@ -283,8 +283,8 @@ const Home = () => {
                         spaceBetween={20}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         breakpoints={{
-                            0: { slidesPerView: 3 },
-                            480: { slidesPerView: 3 },
+                            0: { slidesPerView: 1 },
+                            480: { slidesPerView: 1 },
                             768: { slidesPerView: 3 },
                             1024: { slidesPerView: 3 }
                         }}
@@ -299,7 +299,6 @@ const Home = () => {
                             <SwiperSlide key={index} className="swiper-slide">
                                 <div className="cards cursor-pointer" key={index}
                                     onClick={() => navigate(`/Categorys?q=${data.category}`)}
-                                // onClick={() => navigate(`/Category?cat=${data.category}`)}
                                 >
                                     <div className="card_img">
                                         <img

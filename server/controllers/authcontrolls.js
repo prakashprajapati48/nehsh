@@ -195,7 +195,7 @@ export const dataRetrive = async (req, res) => {
         if (err) {
             console.error(`Error: ${err}`)
         }
-        res.send(result)
+        res.send(result.rows)
     })
 }
 
@@ -206,13 +206,13 @@ export const users = async (req, res) => {
         if (err) throw console.error(`Error in user data getting: ${err}`);
 
         // console.log(`user retrive data is: ${result}`)
-        res.send(result)
+        res.send(result.rows)
     })
 }
 
 export const updateProduct = async (req, res) => {
     const { NewTitle, NewDesc, newPrice, newQuant, productID } = req.body;
-    let sqlQuery = "UPDATE `userdata` SET `productName`=?,`productDesc`=?,`productPrice`= ?,`availableQuantity`=? WHERE `userdata`.`productId` = ?";
+    let sqlQuery = "UPDATE `userdata` SET `productName`=$1,`productDesc`=$2,`productPrice`= $3,`availableQuantity`$4? WHERE `userdata`.`productId` = $5";
 
     connection.query(sqlQuery, [NewTitle, NewDesc, newPrice, newQuant, productID], (err, result) => {
         if (err) console.error(`Error: ${err}`);
@@ -246,7 +246,7 @@ export const searchProduct = async (req, res) => {
     connection.query(sqlQuery, [`%${searchData}%`], (err, result) => {
         if (err) console.error(`Error ${err}`);
 
-        res.send(result)
+        res.send(result.rows)
     })
 }
 
@@ -260,7 +260,7 @@ export const categoryProduct = async (req, res) => {
         }
 
         console.log(`Result is: ${result}`)
-        res.send(result)
+        res.send(result.rows)
     })
     // console.log(`Product is: ${category}`)
     // res.send(`Product is: ${category}`)

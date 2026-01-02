@@ -303,7 +303,7 @@ const Home = () => {
                                 >
                                     <div className="card_img">
                                         <img
-                                            src={Array.isArray(data.file) ? (`http://localhost:5000/uploads/${data.file[0]}`) : (`http://localhost:5000/uploads/${data.file}`)}
+                                            src={Array.isArray(data.file) ? (`data.file`) : (`data.file`)}
                                             className="swiper_slider_image"
                                         />
                                     </div>

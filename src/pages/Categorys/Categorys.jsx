@@ -112,9 +112,9 @@ const Categorys = () => {
                                     {/* <p className="itemDesc">{items.productDesc}</p> */}
                                     <p className="itemPrice">₹{items.productPrice}</p>
                                     <button
-                                        onClick={() => {addedItems.some((itemsbtn) => itemsbtn.productId === items.productId) ? pageredirecter("cart") : handleAdd(items),console.log(`Product id is: ${items.productid}`)}}
+                                        onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === items.productid) ? pageredirecter("cart") : handleAdd(items)}
                                         id="add_cart_btn">
-                                        {addedItems.some((add_items) => add_items.productId === items.productId)
+                                        {addedItems.some((add_items) => add_items.productId === items.productid)
                                             ? "View Cart"
                                             : "Add In Cart"
                                         }

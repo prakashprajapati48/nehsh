@@ -14,7 +14,6 @@ const transporter = nodemailer.createTransport({
 })
 
 let otpsender = async (useremail, otp) => {
-    console.log(`Otp sender email is: ${process.env.useremail}`);
     try {
         const info = await transporter.sendMail({
             from: `"NEHSH Support" <${process.env.useremail}>"`,
@@ -66,11 +65,11 @@ export const signup = async (req, res) => {
                 }
 
                 if (pendingRes.length > 0) {
-                    connection.query("UPDATE pending_users SET otp = ?, expires_at = ? WHERE email = ?", [otp, expiresAt, useremail])
+                    connection.query("UPDATE pending_users SET otp = $1, expires_at = ? WHERE email = $2", [otp, expiresAt, useremail])
                 }
 
                 connection.query(
-                    "INSERT INTO pending_users (username, email, password, otp, expires_at) VALUES (?,?,?,?,?)",
+                    "INSERT INTO pending_users (username, email, password, otp, expires_at) VALUES ($1,$2,$3,$4,$5)",
                     [username, useremail, hashpass, otp, expiresAt]
                 );
             })

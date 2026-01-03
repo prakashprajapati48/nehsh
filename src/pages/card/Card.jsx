@@ -67,7 +67,7 @@ export default function Cart() {
                                             <div className="cartItemdetail">
                                                 <p className="add_card_title" >{item.productName}</p>
                                                 <p className="item_price" >₹{item.productPrice}</p>
-                                                <p className="removep" onClick={() => removeitem(item.productId)}>Remove</p>
+                                                <p className="removep" onClick={() => removeitem(item.productid)}>Remove</p>
                                             </div>
                                         </div>
                                         {/* <p className="item_price" >{item.price * item.quantity}</p> */}

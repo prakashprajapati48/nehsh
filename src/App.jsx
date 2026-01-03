@@ -15,45 +15,14 @@ import Categorys from './pages/Categorys/Categorys'
 import Checkout from './pages/Checkout/Checkout'
 
 function App() {
-  // const [usercheck, setUsercheck] = useState(false)
-  // const [admin_login, setAdmin_login] = useState(false)
-  // const [user, setUser] = useState("")
-
-  // useEffect(() => {
-  //   let token = localStorage.getItem("logintoken")
-  //   let url = new URL(window.location.href);
-  //   let msg = url.pathname.toLowerCase();
-
-  //   if (!token) {
-  //     setAdmin_login(false)
-  //     setUsercheck(true)
-  //   }
-
-  //   else if (!token || msg.includes("admin")) {
-  //     console.log("hello")
-  //     setAdmin_login(false)
-  //     setUsercheck(false)
-  //   }
-
-  //   else {
-  //     let decode = jwtDecode(token)
-  //     setUser(decode.username)
-
-  //     if (msg.includes("admin") || user === "admin") {
-  //       setAdmin_login(true)
-  //     }
-  //     else {
-  //       setAdmin_login(false)
-  //       console.log(`Admin user: ${admin_login}`)
-  //     }
-
-  //   }
-
-  // }, [])
-
-  // if (!usercheck) return null;
-
+  const [loading, setLoading] = React.useState(true);
   const [pageSize, setPagesize] = useState("")
+
+  React.useEffect(() => {
+    setTimeout(() => setLoading(false), 1000); // simulate loading
+  }, []);
+
+  if (loading) return <h1>Project Demo — Loading...</h1>;
 
   useEffect(() => {
     let resize = () => {

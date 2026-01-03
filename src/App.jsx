@@ -16,7 +16,7 @@ import Checkout from './pages/Checkout/Checkout'
 
 function App() {
   const [loading, setLoading] = React.useState(true);
-  const [pageSize, setPagesize] = useState("")
+  const [pageSize, setPagesize] = React.useState("");
 
   React.useEffect(() => {
   const timer = setTimeout(() => setLoading(false), 1000);
@@ -25,7 +25,7 @@ function App() {
 
   if (loading) return <h1 style={{ textAlign: "center", marginTop: "100px" }}>Project Demo — Loading...</h1>;
 
-  useEffect(() => {
+  React.useEffect(() => {
     let resize = () => {
       setPagesize(window.innerWidth);
     }

@@ -11,7 +11,6 @@ Nehsh is a full-stack e-commerce web application built using **React (Vite)** fo
 ### Frontend
 - React.js (Vite)
 - JavaScript (ES6+)
-- HTML5 & CSS3
 - Responsive Design
 
 ### Backend
@@ -42,8 +41,8 @@ Nehsh is a full-stack e-commerce web application built using **React (Vite)** fo
 ```bash
 nehsh/
 │
-├── client/        # React (Vite) frontend
-│   ├── src/
+├── src/        # React (Vite) frontend
+│   ├── Component/
 │   └── vite.config.js
 │
 ├── server/        # Node.js + Express backend
@@ -55,3 +54,27 @@ nehsh/
 ├── database/      # SQL schema & queries
 │
 └── README.md
+
+🛠️ Installation & Setup
+
+1️⃣ Clone the Repository
+
+git clone https://github.com/prakashprajapati48/nehsh.git
+cd nehsh
+
+2️⃣ Frontend Setup
+
+npm install
+npm run dev
+
+3️⃣ Backend Setup
+
+cd server
+npm install
+node .\server.js
+
+4️⃣ Database Setup
+
+Create a SQL database
+Import provided schema
+Configure database credentials in .env

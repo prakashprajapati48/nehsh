@@ -317,9 +317,9 @@ const Home = () => {
                                             </div>
                                         </div>
                                         <button
-                                            onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === data.productId) ? pageredirecter("card") : handleAdd(data)}
+                                            onClick={() => addedItems.some((itemsbtn) => itemsbtn.productid === data.productid) ? pageredirecter("card") : handleAdd(data)}
                                             id="add_cart_btn">
-                                            {addedItems.some((add_items) => add_items.productId === data.productId)
+                                            {addedItems.some((add_items) => add_items.productid === data.productid)
                                                 ? "View Cart"
                                                 : "Add In Cart"
                                             }

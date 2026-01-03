@@ -108,9 +108,9 @@ const Categorys = () => {
                                     <img src={Array.isArray(items.file) ? `${items.file}` : `${items.file}`} alt="" />
                                 </div>
                                 <div className="itemDetails">
-                                    <p className="itemName">{items.productName}</p>
-                                    {/* <p className="itemDesc">{items.productDesc}</p> */}
-                                    <p className="itemPrice">₹{items.productPrice}</p>
+                                    <p className="itemName">{items.productname}</p>
+                                    {/* <p className="itemDesc">{items.productdesc}</p> */}
+                                    <p className="itemPrice">₹{items.productprice}</p>
                                     <button
                                         onClick={() => addedItems.some((itemsbtn) => itemsbtn.productid === items.productid) ? pageredirecter("cart") : handleAdd(items)}
                                         id="add_cart_btn">

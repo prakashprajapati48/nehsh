@@ -9,14 +9,14 @@ export const Cartprovider = ({ children }) => {
     const [wishList, setWishlist] = useState([]);
 
     const addItem = (item) => {
-        let exist = addedItems.some(addit => addit.productId === item.productId)
+        let exist = addedItems.some(addit => addit.productid === item.productid)
         if (!exist) {
             setAddedItems((prev) => [...prev, item]);
         }
     };
 
     const removeItem = (id) => {
-        setAddedItems((prev) => prev.filter((item) => item.productId !== id));
+        setAddedItems((prev) => prev.filter((item) => item.productid !== id));
     };
 
     const wishlists = (items) => {

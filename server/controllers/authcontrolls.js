@@ -5,17 +5,16 @@ import 'dotenv/config'
 import nodemailer from 'nodemailer';
 import Razorpay from 'razorpay';
 
-// let nahshpass = "cgpe bcmc vddc geuo"
-
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "aakashprajapati897@gmail.com",
+        user: process.env.useremail,
         pass: process.env.userpass
     }
 })
 
 let otpsender = async (useremail, otp) => {
+    console.log(`Otp sender email is: ${process.env.useremail}`);
     try {
         const info = await transporter.sendMail({
             from: `"NEHSH Support" <${process.env.useremail}>"`,

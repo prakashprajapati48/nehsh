@@ -16,7 +16,7 @@ export const Cartprovider = ({ children }) => {
     };
 
     const removeItem = (id) => {
-        setAddedItems((prev) => prev.filter((item) => item.productid !== id));
+        setAddedItems((prev) => prev.filter((item) => item.productId !== id));
     };
 
     const wishlists = (items) => {

@@ -16,11 +16,11 @@ export const Cartprovider = ({ children }) => {
     };
 
     const removeItem = (id) => {
-        setAddedItems((prev) => prev.filter((item) => item.productId !== id));
+        setAddedItems((prev) => prev.filter((item) => item.productid !== id));
     };
 
     const wishlists = (items) => {
-        let exist = wishList.some(check => check.productid === items.productid)
+        let exist = wishList.some(check => check.productid === items.productid);
 
         if (!exist) {
             setWishlist((prev) => [...prev, items]);

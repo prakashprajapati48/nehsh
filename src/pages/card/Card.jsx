@@ -24,14 +24,14 @@ export default function Cart() {
 
     const add = (id) => {
         setAddedItems(addedItems.map(item =>
-            item.productid === id
+            item.productId === id
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
         ));
     };
 
     const subt = (id) => {
-        setAddedItems(addedItems.map(item => item.productid === id ?
+        setAddedItems(addedItems.map(item => item.productId === id ?
             { ...item, quantity: item.quantity === 1 ? 1 : item.quantity - 1 } : item))
     }
 
@@ -67,14 +67,14 @@ export default function Cart() {
                                             <div className="cartItemdetail">
                                                 <p className="add_card_title" >{item.productName}</p>
                                                 <p className="item_price" >₹{item.productPrice}</p>
-                                                <p className="removep" onClick={() => removeitem(item.productid)}>Remove</p>
+                                                <p className="removep" onClick={() => removeitem(item.productId)}>Remove</p>
                                             </div>
                                         </div>
                                         {/* <p className="item_price" >{item.price * item.quantity}</p> */}
                                         <div className="quantity">
-                                            <button className="add_btn" onClick={() => add(item.productid)} >+</button>
+                                            <button className="add_btn" onClick={() => add(item.productId)} >+</button>
                                             <p>{item.quantity}</p>
-                                            <button className="remove_btn" onClick={() => subt(item.productid)} >-</button>
+                                            <button className="remove_btn" onClick={() => subt(item.productId)} >-</button>
                                         </div>
                                         <div className="total_final">
                                             <p className="item_price" >₹{parseFloat(item.productPrice * item.quantity).toFixed(2)}</p>

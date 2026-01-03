@@ -22,9 +22,7 @@ function App() {
   const timer = setTimeout(() => setLoading(false), 1000);
   return () => clearTimeout(timer);
 }, []);
-
-  if (loading) return <h1 style={{ textAlign: "center", marginTop: "100px" }}>Project Demo — Loading...</h1>;
-
+  
   useEffect(() => {
     let resize = () => {
       setPagesize(window.innerWidth);
@@ -33,6 +31,8 @@ function App() {
 
     return () => window.removeEventListener("resize", resize)
   }, [])
+
+  if (loading) return <h1 style={{ textAlign: "center", marginTop: "100px" }}>Project Demo — Loading...</h1>;
 
   return (
     <>

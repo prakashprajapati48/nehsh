@@ -114,7 +114,7 @@ const Categorys = () => {
                                     <button
                                         onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === items.productid) ? pageredirecter("cart") : handleAdd(items)}
                                         id="add_cart_btn">
-                                        {addedItems.some((add_items) => add_items.productId === items.productid)
+                                        {addedItems.some((add_items) => add_items.productId === items.productId)
                                             ? "View Cart"
                                             : "Add In Cart"
                                         }

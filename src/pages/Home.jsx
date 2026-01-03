@@ -299,11 +299,10 @@ const Home = () => {
                             <SwiperSlide key={index} className="swiper-slide">
                                 <div className="cards cursor-pointer" key={index}
                                     onClick={() => navigate(`/Categorys?q=${data.category}`)}
-                                // onClick={() => navigate(`/Category?cat=${data.category}`)}
                                 >
                                     <div className="card_img">
                                         <img
-                                            src={Array.isArray(data.file) ? (`http://localhost:5000/uploads/${data.file[0]}`) : (`http://localhost:5000/uploads/${data.file}`)}
+                                            src={Array.isArray(data.file) ? (`${data.file}`) : (`${data.file}`)}
                                             className="swiper_slider_image"
                                         />
                                     </div>

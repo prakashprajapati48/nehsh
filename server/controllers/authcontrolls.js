@@ -5,14 +5,11 @@ import 'dotenv/config'
 import nodemailer from 'nodemailer';
 import Razorpay from 'razorpay';
 
-// let nahshpass = "cgpe bcmc vddc geuo"
-
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "aakashprajapati897@gmail.com",
+        user: process.env.useremail,
         pass: process.env.userpass
-        // pass: "cgpe bcmc vddc geuo"
     }
 })
 
@@ -68,11 +65,11 @@ export const signup = async (req, res) => {
                 }
 
                 if (pendingRes.length > 0) {
-                    connection.query("UPDATE pending_users SET otp = ?, expires_at = ? WHERE email = ?", [otp, expiresAt, useremail])
+                    connection.query("UPDATE pending_users SET otp = $1, expires_at = ? WHERE email = $2", [otp, expiresAt, useremail])
                 }
 
                 connection.query(
-                    "INSERT INTO pending_users (username, email, password, otp, expires_at) VALUES (?,?,?,?,?)",
+                    "INSERT INTO pending_users (username, email, password, otp, expires_at) VALUES ($1,$2,$3,$4,$5)",
                     [username, useremail, hashpass, otp, expiresAt]
                 );
             })
@@ -195,7 +192,7 @@ export const dataRetrive = async (req, res) => {
         if (err) {
             console.error(`Error: ${err}`)
         }
-        res.send(result)
+        res.send(result.rows)
     })
 }
 
@@ -206,13 +203,13 @@ export const users = async (req, res) => {
         if (err) throw console.error(`Error in user data getting: ${err}`);
 
         // console.log(`user retrive data is: ${result}`)
-        res.send(result)
+        res.send(result.rows)
     })
 }
 
 export const updateProduct = async (req, res) => {
     const { NewTitle, NewDesc, newPrice, newQuant, productID } = req.body;
-    let sqlQuery = "UPDATE `userdata` SET `productName`=?,`productDesc`=?,`productPrice`= ?,`availableQuantity`=? WHERE `userdata`.`productId` = ?";
+    let sqlQuery = "UPDATE `userdata` SET `productName`=$1,`productDesc`=$2,`productPrice`= $3,`availableQuantity`$4? WHERE `userdata`.`productId` = $5";
 
     connection.query(sqlQuery, [NewTitle, NewDesc, newPrice, newQuant, productID], (err, result) => {
         if (err) console.error(`Error: ${err}`);
@@ -246,7 +243,7 @@ export const searchProduct = async (req, res) => {
     connection.query(sqlQuery, [`%${searchData}%`], (err, result) => {
         if (err) console.error(`Error ${err}`);
 
-        res.send(result)
+        res.send(result.rows)
     })
 }
 
@@ -254,16 +251,17 @@ export const categoryProduct = async (req, res) => {
     const { category } = req.body;
     let sqlQuery = "SELECT * FROM `userdata` WHERE `category` = $1";
 
-    let ress = connection.query(sqlQuery, [category], (err, result) => {
-        if (err) {
-            console.error(`Error in sql query: ${err}`)
-        }
+    try {
+    const result = await connection.query(
+      "SELECT * FROM userdata WHERE category = $1",
+      [category]
+    );
 
-        console.log(`Result is: ${result}`)
-        res.send(result)
-    })
-    // console.log(`Product is: ${category}`)
-    // res.send(`Product is: ${category}`)
+    res.json(result.rows); // ✅ rows
+  } catch (err) {
+    console.error("Error in sql query:", err);
+    res.status(500).json({ error: "Database error" });
+  }
 }
 
 export const razorpay = async (req, res) => {

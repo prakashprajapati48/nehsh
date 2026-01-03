@@ -26,8 +26,6 @@ Nehsh is a full-stack e-commerce web application built using **React (Vite)** fo
 ## ✨ Features
 
 - 🏠 Homepage with product listings
-- 🛍️ Browse products by category
-- 🔍 Search functionality
 - 🛒 Add to cart & manage cart items
 - 👤 User authentication (Login / Register)
 - 📦 Order placement

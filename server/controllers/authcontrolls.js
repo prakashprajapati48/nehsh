@@ -4,26 +4,20 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config'
 import nodemailer from 'nodemailer';
 import Razorpay from 'razorpay';
+import { Resend } from "resend";
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.useremail,
-        pass: process.env.userpass
-    }
-})
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 let otpsender = async (useremail, otp) => {
     try {
-        const info = await transporter.sendMail({
-            from: `"NEHSH Support" <${process.env.useremail}>"`,
+        const info = await resend.emails.send({
+            from: "NEHSH <process.env.useremail>",
             to: useremail,
             subject: "Verify your NEHSH account",
-            html: `Your otp is: ${otp}`
+            html: `<h3>Your OTP is: ${otp}</h3>`
         });
 
-        console.log(`Message sent: ${info.messageId}`)
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        console.log(`Email send status: ${info}`);
     }
 
     catch (err) {

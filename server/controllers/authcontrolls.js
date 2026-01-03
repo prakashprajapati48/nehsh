@@ -82,7 +82,7 @@ export const signup = async (req, res) => {
 export const otp_verify = async (req, res) => {
     const { otp, email } = req.body;
 
-    let sqlcmd = `INSERT INTO users ( username,email, userpass) VALUES (?,?,?)`;
+    let sqlcmd = `INSERT INTO users ( username,email, userpass) VALUES ($1,$2,$3)`;
 
     connection.query("SELECT * FROM pending_users WHERE email = $1", [email], (err, res1) => {
         if (err) {
@@ -94,8 +94,6 @@ export const otp_verify = async (req, res) => {
             console.error("User not found")
         }
 
-        // console.log(res1)
-
         if (String(res1[0].otp) !== String(otp)) {
             console.log(`${otp} Otp is wrong`);
             return res.status(400).json({ message: "Invalid OTP" });
@@ -103,7 +101,7 @@ export const otp_verify = async (req, res) => {
 
         connection.query(sqlcmd, [res1[0].username, res1[0].email, res1[0].password])
 
-        connection.query("DELETE FROM pending_users WHERE email = ?", [email])
+        connection.query("DELETE FROM pending_users WHERE email = $1", [email])
 
         res.json({ message: "Account created successfully" });
     })

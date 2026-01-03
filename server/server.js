@@ -1,19 +1,28 @@
 import express from 'express';
 import cors from 'cors';
 import path from "path";
-import authcontroller from './route/authRoutes.js'
+import fs from "fs";
+import authcontroller from './route/authRoutes.js';
 
 const app = express()
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
-app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static("uploads"));
+
+const uploadPath = path.join(process.cwd(), "uploads");
+
+// Ensure uploads folder exists
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
+
+app.use("/uploads", express.static(uploadPath));
 
 app.use("/api/auth",authcontroller);
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.get("/",(req,res)=>{
-    res.redirect(302,"http://localhost:5173")
+    res.redirect(302,"https://nehsh.onrender.com")
 })
 
 app.listen(5000, () => {

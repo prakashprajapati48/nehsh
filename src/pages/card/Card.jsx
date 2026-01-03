@@ -67,7 +67,7 @@ export default function Cart() {
                                             <div className="cartItemdetail">
                                                 <p className="add_card_title" >{item.productName}</p>
                                                 <p className="item_price" >₹{item.productPrice}</p>
-                                                <p className="removep" onClick={() => removeitem(item.productid)}>Remove</p>
+                                                <p className="removep" onClick={() => removeitem(item.productId)}>Remove</p>
                                             </div>
                                         </div>
                                         {/* <p className="item_price" >{item.price * item.quantity}</p> */}
@@ -78,7 +78,6 @@ export default function Cart() {
                                         </div>
                                         <div className="total_final">
                                             <p className="item_price" >₹{parseFloat(item.productPrice * item.quantity).toFixed(2)}</p>
-                                            {/* <img src={remove_icon} alt="remove_icon" className="remove_icon" onClick={() => removeitem(item.productid)} /> */}
                                         </div>
                                     </div>
                                 ))

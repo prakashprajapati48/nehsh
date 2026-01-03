@@ -90,8 +90,8 @@ export const otp_verify = async (req, res) => {
             return res.status(400).json({ message: "Signup data not found" });
         }
 
-        if (!res1.length) {
-            console.error("User not found")
+        if (res1.length === 0) {
+            console.error("User not found");
         }
 
         if (String(res1[0].otp) !== String(otp)) {

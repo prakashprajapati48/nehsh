@@ -11,7 +11,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 let otpsender = async (useremail, otp) => {
     try {
         const info = await resend.emails.send({
-            from: "NEHSH <process.env.useremail>",
+            from: "NEHSH <onboarding@resend.dev>",
             to: useremail,
             subject: "Verify your NEHSH account",
             html: `<h3>Your OTP is: ${otp}</h3>`

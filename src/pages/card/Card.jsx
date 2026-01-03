@@ -24,14 +24,14 @@ export default function Cart() {
 
     const add = (id) => {
         setAddedItems(addedItems.map(item =>
-            item.productId === id
+            item.productid === id
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
         ));
     };
 
     const subt = (id) => {
-        setAddedItems(addedItems.map(item => item.productId === id ?
+        setAddedItems(addedItems.map(item => item.productid === id ?
             { ...item, quantity: item.quantity === 1 ? 1 : item.quantity - 1 } : item))
     }
 
@@ -61,25 +61,24 @@ export default function Cart() {
                             {
                                 addedItems.map((item, index) => (
                                     <div key={index} className="card_add_data" >
-                                        <input type="hidden" name="cart_hid" value={item.productId} />
                                         {/* <img src={Array.isArray(item.img) ? item.file : item.img} alt={item.productName} className="add_card_img" /> */}
                                         <div className="add_item_details">
                                             <img src={item.file?.includes("http") ? item.file : `http://localhost:5000/uploads/${item.file}`} alt={item.productName} className="add_card_img" />
                                             <div className="cartItemdetail">
                                                 <p className="add_card_title" >{item.productName}</p>
                                                 <p className="item_price" >₹{item.productPrice}</p>
-                                                <p className="removep" onClick={() => removeitem(item.productId)}>Remove</p>
+                                                <p className="removep" onClick={() => removeitem(item.productid)}>Remove</p>
                                             </div>
                                         </div>
                                         {/* <p className="item_price" >{item.price * item.quantity}</p> */}
                                         <div className="quantity">
-                                            <button className="add_btn" onClick={() => add(item.productId)} >+</button>
+                                            <button className="add_btn" onClick={() => add(item.productid)} >+</button>
                                             <p>{item.quantity}</p>
-                                            <button className="remove_btn" onClick={() => subt(item.productId)} >-</button>
+                                            <button className="remove_btn" onClick={() => subt(item.productid)} >-</button>
                                         </div>
                                         <div className="total_final">
                                             <p className="item_price" >₹{parseFloat(item.productPrice * item.quantity).toFixed(2)}</p>
-                                            {/* <img src={remove_icon} alt="remove_icon" className="remove_icon" onClick={() => removeitem(item.productId)} /> */}
+                                            {/* <img src={remove_icon} alt="remove_icon" className="remove_icon" onClick={() => removeitem(item.productid)} /> */}
                                         </div>
                                     </div>
                                 ))

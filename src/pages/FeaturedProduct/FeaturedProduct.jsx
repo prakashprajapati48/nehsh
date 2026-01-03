@@ -105,9 +105,9 @@ const FeaturedProduct = () => {
 
     const products = [
         {
-            productId: 1,
-            productName: "Premium Wireless Headphones",
-            productPrice: 299.99,
+            productid: 1,
+            productname: "Premium Wireless Headphones",
+            productprice: 299.99,
             originalPrice: 399.99,
             quantity: 1,
             rating: 4.8,
@@ -117,9 +117,9 @@ const FeaturedProduct = () => {
             badgeColor: "#3b82f6"
         },
         {
-            productId: 2,
-            productName: "Smart Watch Pro",
-            productPrice: 449.99,
+            productid: 2,
+            productname: "Smart Watch Pro",
+            productprice: 449.99,
             originalPrice: null,
             quantity: 1,
             rating: 4.9,
@@ -129,9 +129,9 @@ const FeaturedProduct = () => {
             badgeColor: "#22c55e"
         },
         {
-            productId: 3,
-            productName: "Professional Camera Kit",
-            productPrice: 1299.99,
+            productid: 3,
+            productname: "Professional Camera Kit",
+            productprice: 1299.99,
             originalPrice: 1499.99,
             quantity: 1,
             rating: 4.7,
@@ -141,9 +141,9 @@ const FeaturedProduct = () => {
             badgeColor: "#ef4444"
         },
         {
-            productId: 4,
-            productName: "Minimalist Table Lamp",
-            productPrice: 89.99,
+            productid: 4,
+            productname: "Minimalist Table Lamp",
+            productprice: 89.99,
             originalPrice: 129.99,
             quantity: 1,
             rating: 4.6,
@@ -153,9 +153,9 @@ const FeaturedProduct = () => {
             badgeColor: "#f97316"
         },
         {
-            productId: 5,
-            productName: "Portable Bluetooth Speaker",
-            productPrice: 129.99,
+            productid: 5,
+            productname: "Portable Bluetooth Speaker",
+            productprice: 129.99,
             originalPrice: null,
             quantity: 1,
             rating: 4.8,
@@ -165,9 +165,9 @@ const FeaturedProduct = () => {
             badgeColor: "#3b82f6"
         },
         {
-            productId: 6,
-            productName: "Fitness Tracker Band",
-            productPrice: 79.99,
+            productid: 6,
+            productname: "Fitness Tracker Band",
+            productprice: 79.99,
             originalPrice: 99.99,
             quantity: 1,
             rating: 4.5,
@@ -177,9 +177,9 @@ const FeaturedProduct = () => {
             badgeColor: "#f97316"
         },
         {
-            productId: 7,
-            productName: "Ultra-Slim Laptop",
-            productPrice: 1899.99,
+            productid: 7,
+            productname: "Ultra-Slim Laptop",
+            productprice: 1899.99,
             originalPrice: null,
             quantity: 1,
             rating: 4.9,
@@ -189,9 +189,9 @@ const FeaturedProduct = () => {
             badgeColor: "#22c55e"
         },
         {
-            productId: 8,
-            productName: "Smart Home Hub",
-            productPrice: 199.99,
+            productid: 8,
+            productname: "Smart Home Hub",
+            productprice: 199.99,
             originalPrice: 249.99,
             quantity: 1,
             rating: 4.7,
@@ -239,19 +239,19 @@ const FeaturedProduct = () => {
                 <div className="featured_item_card">
                     {products.map((item, index) => (
                         <div className="items_details" key={index}>
-                            <span className="wishlist" onClick={() => { wishList.some(itemadd => itemadd.productId === item.productId) ? wishlistRemove(item.productId) : addWishlist(item) }}>
+                            <span className="wishlist" onClick={() => { wishList.some(itemadd => itemadd.productid === item.productid) ? wishlistRemove(item.productid) : addWishlist(item) }}>
                                 <Heart
-                                    fill={wishList.some(wishitem => wishitem.productId === item.productId) ? "#FB2D36" : "white"}
-                                    stroke={wishList.some(wishitem => wishitem.productId === item.productId) ? "#FB2D36" : "black"}
+                                    fill={wishList.some(wishitem => wishitem.productid === item.productid) ? "#FB2D36" : "white"}
+                                    stroke={wishList.some(wishitem => wishitem.productid === item.productid) ? "#FB2D36" : "black"}
                                     strokeWidth={1.5} />
                             </span>
 
                             <div className="image_container">
-                                <img src={item.file} alt={item.productName} className="item_image" />
+                                <img src={item.file} alt={item.productname} className="item_image" />
 
                                 <div className="add_cart_btn">
-                                    <button onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === item.productId) ? pageredirecter("cart") : handleAdd(item)}>
-                                        <ShoppingCart className="shopping_cart_icon" width={20} height={20} /> {addedItems.some((add_items) => add_items.productId === item.productId)
+                                    <button onClick={() => addedItems.some((itemsbtn) => itemsbtn.productid === item.productid) ? pageredirecter("cart") : handleAdd(item)}>
+                                        <ShoppingCart className="shopping_cart_icon" width={20} height={20} /> {addedItems.some((add_items) => add_items.productid === item.productid)
                                             ? "View Cart"
                                             : "Add In Cart"
                                         }
@@ -262,14 +262,14 @@ const FeaturedProduct = () => {
                             </div>
 
                             <div className="details">
-                                <p className="item_name">{item.productName}</p>
+                                <p className="item_name">{item.productname}</p>
                                 <span className="rate_review">
                                     <Star fill="yellow" stroke="yellow" />
                                     <p className="rating">{item.rating}</p>
                                     <p className="review">({item.reviews})</p>
                                 </span>
                                 <span className="items_price">
-                                    <p className="item_price">₹{item.productPrice}</p>
+                                    <p className="item_price">₹{item.productprice}</p>
                                     <p className="originalprice">{item.originalPrice !== null ? "₹" + item.originalPrice : ""}</p>
                                 </span>
                             </div>

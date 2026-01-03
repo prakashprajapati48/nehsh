@@ -19,15 +19,14 @@ function App() {
   const [pageSize, setPagesize] = useState("")
 
   React.useEffect(() => {
-    setTimeout(() => setLoading(false), 1000); // simulate loading
-  }, []);
+  const timer = setTimeout(() => setLoading(false), 1000);
+  return () => clearTimeout(timer);
+}, []);
 
-  if (loading) return <h1>Project Demo — Loading...</h1>;
+  if (loading) return <h1 style={{ textAlign: "center", marginTop: "100px" }}>Project Demo — Loading...</h1>;
 
   useEffect(() => {
     let resize = () => {
-      // let pagewidth = window.innerWidth;
-      // console.log(`Windows current width: ${pagewidth}`)
       setPagesize(window.innerWidth);
     }
     window.addEventListener("resize", resize);

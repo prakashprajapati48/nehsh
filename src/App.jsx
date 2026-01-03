@@ -15,17 +15,17 @@ import Categorys from './pages/Categorys/Categorys'
 import Checkout from './pages/Checkout/Checkout'
 
 function App() {
-  const [loading, setLoading] = React.useState(true);
-  const [pageSize, setPagesize] = React.useState("");
+  const [loading, setLoading] = useState(true);
+  const [pageSize, setPagesize] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
   const timer = setTimeout(() => setLoading(false), 1000);
   return () => clearTimeout(timer);
 }, []);
 
   if (loading) return <h1 style={{ textAlign: "center", marginTop: "100px" }}>Project Demo — Loading...</h1>;
 
-  React.useEffect(() => {
+  useEffect(() => {
     let resize = () => {
       setPagesize(window.innerWidth);
     }

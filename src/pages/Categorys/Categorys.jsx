@@ -111,12 +111,12 @@ const Categorys = () => {
                                     <p className="itemName">{items.productName}</p>
                                     {/* <p className="itemDesc">{items.productDesc}</p> */}
                                     <p className="itemPrice">₹{items.productPrice}</p>
-                                    <button
-                                        onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === items.productId) ? pageredirecter("cart") : handleAdd(items)}
-                                        id="add_cart_btn">
                                         <input type="hidden" name="hid" value={addedItems.some((itemsbtn) => itemsbtn.productId)} />
                                         <input type="hidden" name="hid" value={addedItems.some((itemsbtn) => itemsbtn.productid)} />
                                         <input type="hidden" name="hid" value={items.productId)} />
+                                    <button
+                                        onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === items.productId) ? pageredirecter("cart") : handleAdd(items)}
+                                        id="add_cart_btn">
                                         {addedItems.some((add_items) => add_items.productId === items.productId)
                                             ? "View Cart"
                                             : "Add In Cart"

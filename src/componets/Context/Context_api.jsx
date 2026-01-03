@@ -9,18 +9,18 @@ export const Cartprovider = ({ children }) => {
     const [wishList, setWishlist] = useState([]);
 
     const addItem = (item) => {
-        let exist = addedItems.some(addit => addit.productid === item.productid)
+        let exist = addedItems.some(addit => addit.productId === item.productId)
         if (!exist) {
             setAddedItems((prev) => [...prev, item]);
         }
     };
 
     const removeItem = (id) => {
-        setAddedItems((prev) => prev.filter((item) => item.productid !== id));
+        setAddedItems((prev) => prev.filter((item) => item.productId !== id));
     };
 
     const wishlists = (items) => {
-        let exist = wishList.some(check => check.productid === items.productid);
+        let exist = wishList.some(check => check.productId === items.productId);
 
         if (!exist) {
             setWishlist((prev) => [...prev, items]);
@@ -28,7 +28,7 @@ export const Cartprovider = ({ children }) => {
     }
 
     const wishlistRemove = (itemId) => {
-        setWishlist((prev) => prev.filter((item) => item.productid !== itemId))
+        setWishlist((prev) => prev.filter((item) => item.productId !== itemId))
     }
 
     return (

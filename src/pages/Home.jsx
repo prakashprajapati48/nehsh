@@ -283,8 +283,8 @@ const Home = () => {
                         spaceBetween={20}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         breakpoints={{
-                            0: { slidesPerView: 3 },
-                            480: { slidesPerView: 3 },
+                            0: { slidesPerView: 1 },
+                            480: { slidesPerView: 1 },
                             768: { slidesPerView: 3 },
                             1024: { slidesPerView: 3 }
                         }}

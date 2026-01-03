@@ -1,0 +1,46 @@
+.signup {
+    position: fixed;
+    z-index: 9999;
+    align-self: anchor-center;
+    justify-self: center;
+    width: 40%;
+    background: rgba(0, 0, 0, 0.45);
+    height: 17rem;
+    align-content: center;
+    backdrop-filter: blur(6px);
+}
+
+.signup_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-self: center;
+    width: 60%;
+}
+
+.signup_header {
+    color: whitesmoke;
+}
+
+.signup_input {
+    width: 100%;
+    font-size: larger;
+    border-radius: 7px;
+}
+
+.showpass {
+    position: absolute;
+    right: 0;
+    width: fit-content;
+    justify-self: anchor-center;
+    left: 57%;
+    align-self: end;
+}
+
+.signup_btn {
+    font-size: larger;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #4145c0;
+    cursor: pointer;
+}

@@ -52,83 +52,6 @@ const Categorys = () => {
 
     return (
         <>
-            {/* <div>
-                <div className="card_header">
-                    <Swiper
-                        slidesPerView={3}
-                        spaceBetween={20}
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
-                        breakpoints={{
-                            0: { slidesPerView: 3 },
-                            480: { slidesPerView: 3 },
-                            768: { slidesPerView: 3 },
-                            1024: { slidesPerView: 3 }
-                        }}
-                        pagination={{ clickable: true }}
-                        navigation={false}
-                        modules={[Navigation]}
-                        className="swiper-container"
-                        style={{ width: "100%", padding: "10px 0" }}
-                    >
-                        {data.map((item, index) => (
-                            <SwiperSlide key={index} className="swiper-slide">
-                                <div className="cards cursor-pointer" key={index}>
-                                    <div className="card_img">
-                                        <img
-                                            // src={Array.isArray(item.file) ? (`${item.file}`) : (`${data.file}`)}
-                                            src={`${item.file}`} onClick={() => setImageview(item.file)}
-                                        />
-                                    </div>
-                                    <div className="card_data">
-                                        {item.productName}
-                                        <div className="price">
-                                            ₹{item.productPrice}
-                                        </div>
-                                    </div>
-                                    <button
-                                        onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === item.productId) ? pageredirecter("cart") : handleAdd(item)}
-                                        id="add_cart_btn">
-                                        {addedItems.some((add_items) => add_items.productId === item.productId)
-                                            ? "View Cart"
-                                            : "Add In Cart"
-                                        }
-                                    </button>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </div>
-
-                <div className="image_viwer">
-                    {imageView && (
-                        <div className="img_overlay" id="img_overlay" onClick={() => setImageview("")} >
-                            <Swiper
-                                effect="coverflow"
-                                grabCursor={true}
-                                centeredSlides={true}
-                                lazy={true}
-                                slidesPerView="auto"
-                                coverflowEffect={{
-                                    rotate: 30,
-                                    stretch: 0,
-                                    depth: 200,
-                                    modifier: 1,
-                                    slideShadows: true
-                                }}
-                                pagination={{ clickable: true }}
-                                navigation={false}
-                                modules={[Navigation, Pagination]}
-                                className="swiper-container"
-                            >
-                                <SwiperSlide className="swiper-slide">
-                                    <img src={`${imageView}`} alt={imageView} />
-                                </SwiperSlide>
-                            </Swiper>
-                        </div>
-                    )}
-                </div>
-            </div> */}
-
             {data.length > 0 ? (
                 <div className="categoryData">
                     <div className="filterIcon" onClick={() => setMenuShow(prev => ({ ...prev, filterShow: !menuShow.filterShow }))}>
@@ -191,6 +114,9 @@ const Categorys = () => {
                                     <button
                                         onClick={() => addedItems.some((itemsbtn) => itemsbtn.productId === items.productId) ? pageredirecter("cart") : handleAdd(items)}
                                         id="add_cart_btn">
+                                        <input type="hidden" name="hid" value={addedItems.some((itemsbtn) => itemsbtn.productId)} />
+                                        <input type="hidden" name="hid" value={addedItems.some((itemsbtn) => itemsbtn.productid)} />
+                                        <input type="hidden" name="hid" value={items.productId)} />
                                         {addedItems.some((add_items) => add_items.productId === items.productId)
                                             ? "View Cart"
                                             : "Add In Cart"

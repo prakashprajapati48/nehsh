@@ -21,10 +21,6 @@ app.use("/uploads", express.static(uploadPath));
 
 app.use("/api/auth",authcontroller);
 
-app.get("/",(req,res)=>{
-    res.redirect(302,"https://nehsh.onrender.com")
-})
-
 app.listen(5000, () => {
     console.log(`Server is running on: http://localhost:5000`)
 })

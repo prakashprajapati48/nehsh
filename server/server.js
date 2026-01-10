@@ -7,8 +7,15 @@ import authcontroller from './route/authRoutes.js';
 const app = express()
 app.use(cors())
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 
-// app.use("/uploads", express.static("uploads"));
+app.use(express.urlencoded({ extended: true }));
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, "redirect")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
 const uploadPath = path.join(process.cwd(), "uploads");
 

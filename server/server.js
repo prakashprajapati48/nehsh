@@ -3,17 +3,19 @@ import cors from 'cors';
 import path from "path";
 import fs from "fs";
 import authcontroller from './route/authRoutes.js';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express()
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const __dirname = path.resolve();
-
 app.use(express.static(path.join(__dirname, "redirect")));
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 

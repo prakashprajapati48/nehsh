@@ -12,7 +12,8 @@ import FeaturedProduct from './pages/FeaturedProduct/FeaturedProduct'
 import Wishlist from './pages/Wishlist/Wishlist'
 import Otp_verify from './componets/Otp/Otp_verify'
 import Categorys from './pages/Categorys/Categorys'
-import Checkout from './pages/Checkout/Checkout'
+import Checkout from './pages/Checkout/Checkout';
+import loader_bar from './images/loader_bar.gif';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ function App() {
     return () => window.removeEventListener("resize", resize)
   }, [])
 
-  if (loading) return <h1 style={{ textAlign: "center", marginTop: "100px" }}>Project Demo — Loading...</h1>;
+  if (loading) return <img src={loader_bar} className="loading-bar"/>;
 
   return (
     <>

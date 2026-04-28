@@ -63,7 +63,7 @@ export default function Cart() {
                                     <div key={index} className="card_add_data" >
                                         {/* <img src={Array.isArray(item.img) ? item.file : item.img} alt={item.productname} className="add_card_img" /> */}
                                         <div className="add_item_details">
-                                            <img src={item.file?.includes("http") ? item.file : `http://localhost:5000/uploads/${item.file}`} alt={item.productname} className="add_card_img" />
+                                            <img src={item.file?.includes("http") ? item.file : `https://nehsh1.onrender.com/uploads/${item.file}`} alt={item.productname} className="add_card_img" />
                                             <div className="cartItemdetail">
                                                 <p className="add_card_title" >{item.productname}</p>
                                                 <p className="item_price" >₹{item.productprice}</p>

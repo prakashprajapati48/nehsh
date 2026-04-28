@@ -19,7 +19,8 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-const uploadPath = path.join(process.cwd(), "uploads");
+// const uploadPath = path.join(process.cwd(), "uploads");
+const uploadPath = path.join(__dirname, "uploads");
 
 // Ensure uploads folder exists
 if (!fs.existsSync(uploadPath)) {

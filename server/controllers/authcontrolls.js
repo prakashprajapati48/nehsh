@@ -178,14 +178,16 @@ export const addData = async (req, res) => {
 }
 
 export const dataRetrive = async (req, res) => {
-    let search_query = "SELECT * FROM userdata";
+    try {
+        const search_query = "SELECT * FROM userdata";
 
-    connection.query(search_query, (err, result) => {
-        if (err) {
-            console.error(`Error: ${err}`)
-        }
-        res.send(result.rows)
-    })
+        const result = await connection.query(search_query);
+
+        res.send(result.rows);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Server Error");
+    }
 }
 
 export const users = async (req, res) => {

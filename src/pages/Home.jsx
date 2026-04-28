@@ -302,7 +302,7 @@ const Home = () => {
                                 >
                                     <div className="card_img">
                                         <img
-                                            src={Array.isArray(data.file) ? (`${data.file}`) : (`${data.file}`)}
+                                            src={Array.isArray(data.file) ? (`${data.file}`) : (`https://nehsh1.onrender.com/uploads/${data.file}`)}
                                             className="swiper_slider_image"
                                         />
                                     </div>

@@ -12,10 +12,7 @@ import pg from "pg";
 const { Pool } = pg;
 export const connection = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false } // required on Railway
 });
-
-console.log(`Database url: ${process.env.DATABASE_URL}`)
 
 if (connection) {
     console.log("Database successfully connected!")

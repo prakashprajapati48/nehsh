@@ -105,7 +105,7 @@ const Categorys = () => {
                         {data.map((items, idx) => (
                             <div className="categoryItems" key={idx}>
                                 <div className="categoryImg">
-                                    <img src={Array.isArray(items.file) ? `${items.file}` : `${items.file}`} alt="" />
+                                    <img src={Array.isArray(items.file) ? `https://nehsh1.onrender.com/uploads/${items.file}` : `https://nehsh1.onrender.com/uploads/${items.file}`} alt="" />
                                 </div>
                                 <div className="itemDetails">
                                     <p className="itemName">{items.productname}</p>

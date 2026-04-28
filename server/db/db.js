@@ -15,8 +15,8 @@ export const connection = new Pool({
     ssl: { rejectUnauthorized: false } // required on Railway
 });
 
+console.log(`Database url: ${process.env.DATABASE_URL}`)
+
 if (connection) {
-    // console.log(`db host: ${process.env.dbhost}`)
-    // console.log(`db user: ${process.env.dbuser}`)
     console.log("Database successfully connected!")
 }

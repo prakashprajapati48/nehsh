@@ -178,7 +178,7 @@ export const addData = async (req, res) => {
 }
 
 export const dataRetrive = async (req, res) => {
-    let search_query = "SELECT * FROM userdata"
+    let search_query = "SELECT * FROM userdata";
 
     connection.query(search_query, (err, result) => {
         if (err) {

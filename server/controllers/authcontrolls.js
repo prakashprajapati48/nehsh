@@ -43,7 +43,7 @@ export const signup = async (req, res) => {
                 console.error(`Error in database finding user`)
             }
 
-            if (result.length > 0) {
+            if (result.rows.length > 0) {
                 console.log(`${username} already exist`)
                 return res.status(400).json({ message: "User already created account" });
             }
@@ -58,7 +58,7 @@ export const signup = async (req, res) => {
                     console.error(`Error in pending user db: ${err}`)
                 }
 
-                if (pendingRes.length > 0) {
+                if (pendingRes.rows.length > 0) {
                     connection.query("UPDATE pending_users SET otp = $1, expires_at = ? WHERE email = $2", [otp, expiresAt, useremail])
                 }
 
@@ -90,16 +90,16 @@ export const otp_verify = async (req, res) => {
             return res.status(400).json({ message: "Signup data not found" });
         }
 
-        if (res1.length === 0) {
+        if (res1.rows.length === 0) {
             console.error("User not found");
         }
 
-        if (String(res1[0].otp) !== String(otp)) {
+        if (String(res1.rows[0].otp) !== String(otp)) {
             console.log(`${otp} Otp is wrong`);
             return res.status(400).json({ message: "Invalid OTP" });
         }
 
-        connection.query(sqlcmd, [res1[0].username, res1[0].email, res1[0].password])
+        connection.query(sqlcmd, [res1.rows[0].username, res1.rows[0].email, res1.rows[0].password])
 
         connection.query("DELETE FROM pending_users WHERE email = $1", [email])
 

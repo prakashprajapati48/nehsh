@@ -32,13 +32,13 @@ export const signup = async (req, res) => {
 
         let sqlcmd = `INSERT INTO users ( username,email, userpass) VALUES (?,?,?)`;
 
-        let checkexist = "SELECT * FROM users WHERE username = $1";
+        let checkexist = "SELECT * FROM users WHERE username = $1 OR email = $2";
 
         let saltround = 10
         let salt = await bcrypt.genSalt(saltround)
         let hashpass = await bcrypt.hash(userpass, salt);
 
-        connection.query(checkexist, [username], (err, result) => {
+        connection.query(checkexist, [username,useremail], (err, result) => {
             if (err) {
                 console.error(`Error in database finding user`)
             }

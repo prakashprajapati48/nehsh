@@ -119,9 +119,9 @@ export const login = async (req, res) => {
             return res.status(201).json({ message: "Login server in error" });
         }
 
-        if (result.length > 0) {
+        if (result.rows.length > 0) {
 
-            let dbpass = result[0].userpass;
+            let dbpass = result.rows[0].userpass;
             bcrypt.compare(loginpass, dbpass, (err, resu) => {
                 if (err) {
                     console.error("Error")
@@ -135,7 +135,7 @@ export const login = async (req, res) => {
 
                 let jwt_secert = "ecomm"
 
-                let logintoken = jwt.sign({ userId: result[0].userId, useremail: result[0].email, username: result[0].username, usrepass: result[0].userpass },
+                let logintoken = jwt.sign({ userId: result.rows[0].userId, useremail: result.rows[0].email, username: result.rows[0].username, usrepass: result.rows[0].userpass },
                     jwt_secert,
                     { expiresIn: '1h' }
                 )
@@ -144,7 +144,7 @@ export const login = async (req, res) => {
                 console.log("Successfuly login")
                 return res.json({
                     message: "Successfully login",
-                    username: result[0].username,
+                    username: result.rows[0].username,
                     token: logintoken
                 });
             })
